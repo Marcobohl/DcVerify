@@ -1,0 +1,6 @@
+name: Dc Verify
+version: '${project.version}'
+main: net.celestiacraft.dcverify.DcVerify
+description: Dc-verify System von Celestiacraft.net
+authors: [ Marcobohl ]
+website: Celestiacraft.net
