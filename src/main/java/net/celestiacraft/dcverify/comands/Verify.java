@@ -43,29 +43,29 @@ public class Verify extends Command implements TabExecutor {
             sender.sendMessage(new TextComponent("§6[§3Celestiacraft§6]§7 Dein Verify Code Lautet: §a" + verifycode + "§7."));
 
         } else if (args.length == 1) {
-            if (args[0].equalsIgnoreCase("Check")) {
-                Boolean verifycode = data.checkverify(((ProxiedPlayer) sender).getUniqueId());
-                if (verifycode == false) {
+            if (args[0].equalsIgnoreCase("check")) {
+                boolean verifycode = data.checkverify(((ProxiedPlayer) sender).getUniqueId());
+                if (!verifycode) {
                     sender.sendMessage(new TextComponent("§6[§3Celestiacraft§6]§7 Aktuell bist du mit §akeinem Discored User§7 Verknüpft."));
                 } else {
                     String Verifydcname = data.selectverifydiscoruser(((ProxiedPlayer) sender).getUniqueId());
                     sender.sendMessage(new TextComponent("§6[§3Celestiacraft§6]§7 Dein Verknüpfter Discord Account Lautet:§a " + Verifydcname + "§7."));
                 }
-            } else if (args[0].equalsIgnoreCase("Delete")) {
-                Boolean verifycode = data.checkverify(((ProxiedPlayer) sender).getUniqueId());
-                if (verifycode == false) {
+            } else if (args[0].equalsIgnoreCase("delete")) {
+                boolean verifycode = data.checkverify(((ProxiedPlayer) sender).getUniqueId());
+                if (!verifycode) {
                     sender.sendMessage(new TextComponent("§6[§3Celestiacraft§6]§7 Die Verknüpfung konnte nicht gelöscht werden da du mit §akeinem Discored User§7 Verknüpft bist."));
                 } else {
                     String Verifydcname = data.selectverifydiscoruser(((ProxiedPlayer) sender).getUniqueId());
                     data.removeverify(((ProxiedPlayer) sender).getUniqueId());
                     sender.sendMessage(new TextComponent("§6[§3Celestiacraft§6]§7 Deine Verknüpfung mit:§a " + Verifydcname + "§7 wurde gelöscht."));
                 }
-            } else if (args[0].equalsIgnoreCase("Accept")) {
-                Boolean verifycode = data.checkverify(((ProxiedPlayer) sender).getUniqueId());
+            } else if (args[0].equalsIgnoreCase("accept")) {
+                boolean verifycode = data.checkverify(((ProxiedPlayer) sender).getUniqueId());
                 String Verifydcname = data.selectverifydiscoruser(((ProxiedPlayer) sender).getUniqueId());
-                if (verifycode == false && Verifydcname == null) {
+                if (!verifycode && Verifydcname == null) {
                     sender.sendMessage(new TextComponent("§6[§3Celestiacraft§6]§7 Aktuell kannst du §akeine Verknüpfung bestätigen§7 da du keine anfrage hast."));
-                } else if (verifycode == true && Verifydcname != null)  {
+                } else if (verifycode && Verifydcname != null)  {
                     sender.sendMessage(new TextComponent("§6[§3Celestiacraft§6]§7 Aktuell bist du mit dem User:§a " + Verifydcname + "§7 Verknüpft du kannst die Verknüpfung jederzeit mit §a/Verify delete §7löschen."));
                 } else {
 

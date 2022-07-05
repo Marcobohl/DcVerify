@@ -23,7 +23,7 @@ public class Mysql {
         hikari.setMaximumPoolSize(10);
         hikari.setJdbcUrl("jdbc:mysql://localhost/dcverify");
         hikari.setPassword("g8Rn5MCf5WHQTys");
-        hikari.setUsername("Celestiacraftmcserver");
+        hikari.setUsername(username);
         hikari.addDataSourceProperty("cachePrepStmts", "true");
         hikari.addDataSourceProperty("prepStmtCacheSize", "250");
         hikari.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
