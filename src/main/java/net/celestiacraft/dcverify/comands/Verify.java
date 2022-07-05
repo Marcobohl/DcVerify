@@ -8,6 +8,7 @@ import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 import net.md_5.bungee.api.plugin.TabExecutor;
+import net.md_5.bungee.config.Configuration;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,6 +21,7 @@ public class Verify extends Command implements TabExecutor {
     public static Sqlgetter data;
     public static Mysql mysql;
     public static HashMap<ProxiedPlayer, Boolean> confimcommand = new HashMap<>();
+    public Configuration configuration;
 
     public Verify(DcVerify plugin) {
         super("verify");
@@ -82,7 +84,7 @@ public class Verify extends Command implements TabExecutor {
 
 
             else {
-                sender.sendMessage(new TextComponent("§6[§3Celestiacraft§6]§7 Bitte gebe §a/Verify §7<§aCheck§7/§aDelete§7/§aAccept§7> ein."));
+                sender.sendMessage(new TextComponent("§6[§3Celestiacraft§6]§7 Bitte gebe §a/Verify §7<§acheck§7/§adelete§7/§aaccept§7> ein."));
             }
         } else {
             sender.sendMessage(new TextComponent("§6[§3Celestiacraft§6]§7 Bitte gebe §a/Verify §7<§aCheck§7/§aDelete§7/§aAccept§7> ein."));
