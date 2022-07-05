@@ -1,4 +1,4 @@
-# DcVerify
+# DCVerify
 Celestiacraft DiscordVerify System
 # Algemeien Infos: 
 
