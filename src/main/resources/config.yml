@@ -1,7 +1,24 @@
 # mysql
-ip: '127.0.0.1'
-databasename: 'verify'
-username: 'yourUsername'
-password: 'yourpassword'
+databaseip: "127.0.0.1"
+databasename: "verify"
+username: "yourUsername"
+password: "yourpassword"
 
 # message
+verify_prefix_use: true
+verify_prefix: "[DCVerify]"
+
+verify_connsole_message: "&7Du Musst ein Spieler Sein."
+verify_code_message: "&7Dein Verify Code Lautet:&a %verifycode% &7."
+verify_check_noverifykation: "&7Aktuell bist du mit &akeinem Discored User&7 Verknüpft."
+verify_check_verifycode: "&7Dein Verknüpfter Discord Account Lautet:&a %verifydcname% &7."
+verify_delete_nodelete: "&7Die Verknüpfung konnte nicht gelöscht werden da du mit §akeinem Discored User&7 Verknüpft bist."
+verify_delete_verifykation: "&7Deine Verknüpfung mit:&a %verifydcname% &7wurde gelöscht."
+verify_accept_noaccept: "&7Aktuell kannst du §akeine Verknüpfung bestätigen&7 da du keine anfrage hast."
+verify_accept_existing: "&7Aktuell bist du mit dem User:&a %verifydcname% &7Verknüpft du kannst die Verknüpfung jederzeit mit &a/Verify delete &7löschen."
+verify_accept_accepting: "&7Gebe §a/Verify Accept&7 erneut ein um die Verknüpfung mit:&a %verifydcname% &7zu bestätigt."
+verify_accept_successful: "&7Deine Verknüpfung mit:&a %Verifydcname% &7wurde hirmit bestätigt."
+verify_help: "&7Bitte gebe &a/Verify &7<§acheck&7/&adelete&7/§aaccept&7> ein."
+
+
+

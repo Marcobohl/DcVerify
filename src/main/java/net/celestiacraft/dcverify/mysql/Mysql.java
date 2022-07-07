@@ -1,6 +1,7 @@
 package net.celestiacraft.dcverify.mysql;
 
 import com.zaxxer.hikari.HikariDataSource;
+import net.celestiacraft.dcverify.DcVerify;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -9,10 +10,10 @@ public class Mysql {
 
     private  HikariDataSource hikari;
 
-    String address = "127.0.0.1";
-    String name = "dcverify";
-    String username = "";
-    String password = "";
+    String address = DcVerify.config.getString("databaseip");
+    String name = DcVerify.config.getString("databasename");
+    String username = DcVerify.config.getString("username");
+    String password = DcVerify.config.getString("password");
 
 
     public void connectToDatabase() {
@@ -21,8 +22,8 @@ public class Mysql {
 
         hikari.setDriverClassName("com.mysql.cj.jdbc.Driver");
         hikari.setMaximumPoolSize(10);
-        hikari.setJdbcUrl("jdbc:mysql://localhost/");
-        hikari.setPassword("");
+        hikari.setJdbcUrl("jdbc:mysql://"+ address +"/" + name);
+        hikari.setPassword(password);
         hikari.setUsername(username);
         hikari.addDataSourceProperty("cachePrepStmts", "true");
         hikari.addDataSourceProperty("prepStmtCacheSize", "250");
