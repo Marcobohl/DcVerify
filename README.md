@@ -7,6 +7,7 @@ Dies ist kein vollständiges Dc-Verify System. Hir handelt es sich um ein Bungee
 # Plugin Infos
 - Version: 1.19.
 - Pluginart: Bungeecord
+- Alle Nachrichten Editierbar in der Config
 - Wird benötigt: MYSQL 
 
 # Commands:
