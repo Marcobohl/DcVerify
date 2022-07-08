@@ -1,7 +1,6 @@
 package net.celestiacraft.dcverify.comands;
 
 import net.celestiacraft.dcverify.DcVerify;
-import net.celestiacraft.dcverify.mysql.Mysql;
 import net.celestiacraft.dcverify.mysql.Sqlgetter;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
@@ -19,7 +18,6 @@ public class Verify extends Command implements TabExecutor {
 
     public static Sqlgetter data;
     public static HashMap<ProxiedPlayer, Boolean> confimcommand = new HashMap<>();
-
 
     public Verify(DcVerify plugin) {
         super("verify");
@@ -111,7 +109,6 @@ public class Verify extends Command implements TabExecutor {
                 }
             }
 
-
             else {
                 sender.sendMessage(new TextComponent(message("verify_help")));
             }
@@ -123,8 +120,8 @@ public class Verify extends Command implements TabExecutor {
     @Override
     public Iterable<String> onTabComplete(CommandSender commandSender, String[] args) {
         if (args.length == 1) {
-            List<String> servers = new ArrayList<>(Arrays.asList("accept", "check", "delete"));
-            return servers;
+                List<String> servers = new ArrayList<>(Arrays.asList("accept", "check", "delete"));
+                return servers;
         } else {
             return new ArrayList<>();
         }

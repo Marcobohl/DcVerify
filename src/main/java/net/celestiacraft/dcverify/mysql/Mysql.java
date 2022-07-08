@@ -3,9 +3,6 @@ package net.celestiacraft.dcverify.mysql;
 import com.zaxxer.hikari.HikariDataSource;
 import net.celestiacraft.dcverify.DcVerify;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-
 public class Mysql {
 
     private  HikariDataSource hikari;
