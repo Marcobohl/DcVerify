@@ -17,8 +17,8 @@ Dies ist kein vollständiges Dc-Verify System. Hir handelt es sich um ein Bungee
 - /verify check - Prüfe ob eine Verifikation mit einem Dc user existiert.
 
 # Permissions:
-- DCVerify.code
-- DCVerify.accept 
-- DCVerify.delete 
-- DCVerify.check
-- DCVerify.user.* - umfast code, accept, delete & check.
+- DCVerify.user.code
+- DCVerify.user.accept 
+- DCVerify.user.delete 
+- DCVerify.user.check
+- DCVerify.user.*
