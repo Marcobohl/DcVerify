@@ -73,39 +73,62 @@ public class Verify extends Command implements TabExecutor {
 
         } else if (args.length == 1) {
             if (args[0].equalsIgnoreCase("check")) {
-                boolean verifycode = data.checkverify(((ProxiedPlayer) sender).getUniqueId());
-                if (!verifycode) {
-                    sender.sendMessage(new TextComponent(message("verify_check_noverifykation")));
-                } else {
-                    String Verifydcname = data.selectverifydiscoruser(((ProxiedPlayer) sender).getUniqueId());
-                    sender.sendMessage(new TextComponent(verifydcnameemessage("verify_check_verifycode", Verifydcname)));
-                }
-            } else if (args[0].equalsIgnoreCase("delete")) {
-                boolean verifycode = data.checkverify(((ProxiedPlayer) sender).getUniqueId());
-                if (!verifycode) {
-                    sender.sendMessage(new TextComponent(message("verify_delete_nodelete")));
-                } else {
-                    String Verifydcname = data.selectverifydiscoruser(((ProxiedPlayer) sender).getUniqueId());
-                    data.removeverify(((ProxiedPlayer) sender).getUniqueId());
-                    sender.sendMessage(new TextComponent(verifydcnameemessage("verify_delete_verifykation", Verifydcname)));
-                }
-            } else if (args[0].equalsIgnoreCase("accept")) {
-                boolean verifycode = data.checkverify(((ProxiedPlayer) sender).getUniqueId());
-                String Verifydcname = data.selectverifydiscoruser(((ProxiedPlayer) sender).getUniqueId());
-                if (!verifycode && Verifydcname == null) {
-                    sender.sendMessage(new TextComponent(message("verify_accept_noaccept")));
-                } else if (verifycode && Verifydcname != null)  {
-                    sender.sendMessage(new TextComponent(verifydcnameemessage("verify_accept_existing",Verifydcname )));
-                } else {
 
-                    if (confimcommand.get(sender) == null) {
-                        sender.sendMessage(new TextComponent(verifydcnameemessage("verify_accept_accepting", Verifydcname)));
-                        confimcommand.put((ProxiedPlayer) sender, true);
+                if (sender.hasPermission("DCVerify.check") || sender.hasPermission("DCVerify.user.*")) {
+
+                    boolean verifycode = data.checkverify(((ProxiedPlayer) sender).getUniqueId());
+                    if (!verifycode) {
+                        sender.sendMessage(new TextComponent(message("verify_check_noverifykation")));
                     } else {
-                        data.accepterify(((ProxiedPlayer) sender).getUniqueId());
-                        sender.sendMessage(new TextComponent(verifydcnameemessage("verify_accept_successful", Verifydcname)));
-                        confimcommand.remove(sender);
+                        String Verifydcname = data.selectverifydiscoruser(((ProxiedPlayer) sender).getUniqueId());
+                        sender.sendMessage(new TextComponent(verifydcnameemessage("verify_check_verifycode", Verifydcname)));
                     }
+
+                } else {
+                    sender.sendMessage(new TextComponent(message("verify_nopermissions")));
+                }
+
+            } else if (args[0].equalsIgnoreCase("delete") ) {
+
+                if (sender.hasPermission("DCVerify.delete") || sender.hasPermission("DCVerify.user.*")) {
+
+                    boolean verifycode = data.checkverify(((ProxiedPlayer) sender).getUniqueId());
+                    if (!verifycode) {
+                        sender.sendMessage(new TextComponent(message("verify_delete_nodelete")));
+                    } else {
+                        String Verifydcname = data.selectverifydiscoruser(((ProxiedPlayer) sender).getUniqueId());
+                        data.removeverify(((ProxiedPlayer) sender).getUniqueId());
+                        sender.sendMessage(new TextComponent(verifydcnameemessage("verify_delete_verifykation", Verifydcname)));
+                    }
+
+                } else {
+                    sender.sendMessage(new TextComponent(message("verify_nopermissions")));
+                }
+
+            } else if (args[0].equalsIgnoreCase("accept")) {
+
+                if (sender.hasPermission("DCVerify.accept") || sender.hasPermission("DCVerify.user.*")) {
+
+                    boolean verifycode = data.checkverify(((ProxiedPlayer) sender).getUniqueId());
+                    String Verifydcname = data.selectverifydiscoruser(((ProxiedPlayer) sender).getUniqueId());
+                    if (!verifycode && Verifydcname == null) {
+                        sender.sendMessage(new TextComponent(message("verify_accept_noaccept")));
+                    } else if (verifycode && Verifydcname != null)  {
+                        sender.sendMessage(new TextComponent(verifydcnameemessage("verify_accept_existing",Verifydcname )));
+                    } else {
+
+                        if (confimcommand.get(sender) == null) {
+                            sender.sendMessage(new TextComponent(verifydcnameemessage("verify_accept_accepting", Verifydcname)));
+                            confimcommand.put((ProxiedPlayer) sender, true);
+                        } else {
+                            data.accepterify(((ProxiedPlayer) sender).getUniqueId());
+                            sender.sendMessage(new TextComponent(verifydcnameemessage("verify_accept_successful", Verifydcname)));
+                            confimcommand.remove(sender);
+                        }
+                    }
+
+                } else {
+                    sender.sendMessage(new TextComponent(message("verify_nopermissions")));
                 }
             }
 

@@ -4,10 +4,16 @@ databasename: "verify"
 username: "yourUsername"
 password: "yourpassword"
 
-# message
+# prefix
 verify_prefix_use: true
 verify_prefix: "[DCVerify]"
 
+# Mesage Placeholder
+# %verifycode% - Gibt deine 6 Stelligen Verify Code aus.
+# %verifydcname% - gibt den Verknüpften Account aus.
+
+# message
+verify_nopermissions: "System fehler Bitte gebe /help ein um alle commands zu sehen."
 verify_connsole_message: "&7Du Musst ein Spieler Sein."
 verify_code_message: "&7Dein Verify Code Lautet:&a %verifycode% &7."
 verify_check_noverifykation: "&7Aktuell bist du mit &akeinem Discored User&7 Verknüpft."
