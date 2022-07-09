@@ -15,3 +15,10 @@ Dies ist kein vollständiges Dc-Verify System. Hir handelt es sich um ein Bungee
 - /verify accept - Verify Akzetieren.
 - /verify delete - Verify löschen 
 - /verify check - Prüfe ob eine Verifikation mit einem Dc user existiert.
+
+# Permissions:
+- DCVerify.code
+- DCVerify.accept 
+- DCVerify.delete 
+- DCVerify.check
+- DCVerify.user.* - umfast code, accept, delete & check.
