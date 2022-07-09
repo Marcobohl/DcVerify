@@ -67,9 +67,15 @@ public class Verify extends Command implements TabExecutor {
 
         if (args.length == 0) {
 
-            String verifycode = data.selectverifycode(((ProxiedPlayer) sender).getUniqueId());
+            if (sender.hasPermission("DCVerify.check") || sender.hasPermission("DCVerify.user.*")) {
 
-            sender.sendMessage(new TextComponent(verifycodemessage("verify_code_message",verifycode)));
+                String verifycode = data.selectverifycode(((ProxiedPlayer) sender).getUniqueId());
+
+                sender.sendMessage(new TextComponent(verifycodemessage("verify_code_message",verifycode)));
+
+            } else {
+                sender.sendMessage(new TextComponent(message("verify_nopermissions")));
+            }
 
         } else if (args.length == 1) {
             if (args[0].equalsIgnoreCase("check")) {
