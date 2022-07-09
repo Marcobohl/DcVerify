@@ -64,12 +64,7 @@ public class Sqlgetter {
         }
         return false;
     }
-
-    /**
-     * Checks if id exits
-     * @param {int} random - id
-     * @return
-     */
+    
     public int checkrand(int random) {
         int randomid = 0;
         try {

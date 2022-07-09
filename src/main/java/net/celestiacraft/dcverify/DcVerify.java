@@ -20,7 +20,7 @@ public final class DcVerify extends Plugin {
     public static Sqlgetter data;
 
 
-    public static Configuration config;
+    public Configuration config;
 
 
     @Override
@@ -29,7 +29,7 @@ public final class DcVerify extends Plugin {
         this.data = new Sqlgetter(this);
         this.config = loadConfig();
 
-        this.MYSQL = new Mysql();
+        this.MYSQL = new Mysql(this);
 
         MYSQL.connectToDatabase();
 
@@ -55,6 +55,16 @@ public final class DcVerify extends Plugin {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public boolean reload () {
+        MYSQL.disconect();
+        MYSQL.connectToDatabase();
+        config = loadConfig();
+        if (config == null) {
+            return false;
+        }
+        return true;
     }
 
             @Override
