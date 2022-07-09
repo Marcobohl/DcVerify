@@ -67,7 +67,7 @@ public class Verify extends Command implements TabExecutor {
 
         if (args.length == 0) {
 
-            if (sender.hasPermission("DCVerify.check") || sender.hasPermission("DCVerify.user.*")) {
+            if (sender.hasPermission("DCVerify.user.code") || sender.hasPermission("DCVerify.user.*")) {
 
                 String verifycode = data.selectverifycode(((ProxiedPlayer) sender).getUniqueId());
 
@@ -80,7 +80,7 @@ public class Verify extends Command implements TabExecutor {
         } else if (args.length == 1) {
             if (args[0].equalsIgnoreCase("check")) {
 
-                if (sender.hasPermission("DCVerify.check") || sender.hasPermission("DCVerify.user.*")) {
+                if (sender.hasPermission("DCVerify.user.check") || sender.hasPermission("DCVerify.user.*")) {
 
                     boolean verifycode = data.checkverify(((ProxiedPlayer) sender).getUniqueId());
                     if (!verifycode) {
@@ -96,7 +96,7 @@ public class Verify extends Command implements TabExecutor {
 
             } else if (args[0].equalsIgnoreCase("delete") ) {
 
-                if (sender.hasPermission("DCVerify.delete") || sender.hasPermission("DCVerify.user.*")) {
+                if (sender.hasPermission("DCVerify.user.delete") || sender.hasPermission("DCVerify.user.*")) {
 
                     boolean verifycode = data.checkverify(((ProxiedPlayer) sender).getUniqueId());
                     if (!verifycode) {
@@ -113,7 +113,7 @@ public class Verify extends Command implements TabExecutor {
 
             } else if (args[0].equalsIgnoreCase("accept")) {
 
-                if (sender.hasPermission("DCVerify.accept") || sender.hasPermission("DCVerify.user.*")) {
+                if (sender.hasPermission("DCVerify.user.accept") || sender.hasPermission("DCVerify.user.*")) {
 
                     boolean verifycode = data.checkverify(((ProxiedPlayer) sender).getUniqueId());
                     String Verifydcname = data.selectverifydiscoruser(((ProxiedPlayer) sender).getUniqueId());
