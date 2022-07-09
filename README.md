@@ -15,10 +15,14 @@ Dies ist kein vollständiges Dc-Verify System. Hir handelt es sich um ein Bungee
 - /verify accept - Verify Akzetieren.
 - /verify delete - Verify löschen 
 - /verify check - Prüfe ob eine Verifikation mit einem Dc user existiert.
+- /verify reload - Relode das Plugin. 
 
 # Permissions:
-- DCVerify.user.code
-- DCVerify.user.accept 
-- DCVerify.user.delete 
-- DCVerify.user.check
-- DCVerify.user.*
+- dcverify.user.code
+- dcverify.user.accept 
+- dcverify.user.delete 
+- dcverify.user.check
+- dcverify.user.*
+
+- dcverify.admin.reload
+
