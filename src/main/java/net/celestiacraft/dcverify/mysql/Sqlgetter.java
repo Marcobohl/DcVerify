@@ -3,6 +3,7 @@ package net.celestiacraft.dcverify.mysql;
 import net.celestiacraft.dcverify.DcVerify;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,7 +12,9 @@ import java.util.UUID;
 
 public class Sqlgetter {
 
-    private DcVerify plugin;
+    private final DcVerify plugin;
+    Connection connection = null;
+    PreparedStatement ps = null;
 
     public Sqlgetter(DcVerify plugin) {
         this.plugin = plugin;
@@ -31,26 +34,30 @@ public class Sqlgetter {
         }
 
         try {
+            connection = DcVerify.MYSQL.getHikari().getConnection();
+
             UUID uuid = player.getUniqueId();
             if (!exists(uuid)) {
-                PreparedStatement ps = plugin.MYSQL.getHikari().getConnection().prepareStatement("INSERT IGNORE INTO playerdata" + " (DCID,MCUUID,VERIFYID,VERIFYCHECK,DCNAME) VALUES (?,?,?,?,?)");
+                ps = connection.prepareStatement("INSERT IGNORE INTO playerdata" + " (DCID,MCUUID,VERIFYID,VERIFYCHECK,DCNAME) VALUES (?,?,?,?,?)");
                 ps.setString(1, null);
                 ps.setString(2, uuid.toString());
                 ps.setString(3, String.valueOf(randInt));
                 ps.setBoolean(4, false);
                 ps.setString(5, null);
                 ps.executeUpdate();
-                ps.close();
-                return;
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            closeconnection(connection, ps);
         }
     }
 
     public boolean exists(UUID uuid) {
         try {
-            PreparedStatement ps = plugin.MYSQL.getHikari().getConnection().prepareStatement("SELECT * FROM playerdata WHERE MCUUID=?");
+            connection = DcVerify.MYSQL.getHikari().getConnection();
+
+            ps = connection.prepareStatement("SELECT * FROM playerdata WHERE MCUUID=?");
             ps.setString(1, uuid.toString());
 
             ResultSet results = ps.executeQuery();
@@ -61,6 +68,8 @@ public class Sqlgetter {
             return false;
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            closeconnection(connection, ps);
         }
         return false;
     }
@@ -68,8 +77,9 @@ public class Sqlgetter {
     public int checkrand(int random) {
         int randomid = 0;
         try {
+            connection = DcVerify.MYSQL.getHikari().getConnection();
 
-            PreparedStatement ps = plugin.MYSQL.getHikari().getConnection().prepareStatement("SELECT `VERIFYID` FROM playerdata WHERE VERIFYID = " + random);
+            ps = connection.prepareStatement("SELECT `VERIFYID` FROM playerdata WHERE VERIFYID = " + random);
             ResultSet result = ps.executeQuery();
             while (result.next()) {
                 randomid = result.getInt(1);
@@ -77,6 +87,8 @@ public class Sqlgetter {
             ps.close();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            closeconnection(connection, ps);
         }
         return randomid;
 
@@ -85,8 +97,9 @@ public class Sqlgetter {
     public String selectverifycode(UUID uuid) {
         String fcode = "";
         try {
+            connection = DcVerify.MYSQL.getHikari().getConnection();
 
-            PreparedStatement ps = plugin.MYSQL.getHikari().getConnection().prepareStatement("SELECT `VERIFYID` from playerdata WHERE MCUUID=?");
+            ps = connection.prepareStatement("SELECT `VERIFYID` from playerdata WHERE MCUUID=?");
             ps.setString(1, ( uuid.toString() ));
             ResultSet result = ps.executeQuery();
             while (result.next()) {
@@ -95,6 +108,8 @@ public class Sqlgetter {
             ps.close();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            closeconnection(connection, ps);
         }
         return fcode;
     }
@@ -102,8 +117,9 @@ public class Sqlgetter {
     public boolean checkverify(UUID uuid) {
         boolean effect = false;
         try {
+            connection = plugin.MYSQL.getHikari().getConnection();
 
-            PreparedStatement ps = plugin.MYSQL.getHikari().getConnection().prepareStatement("SELECT `VERIFYCHECK` from playerdata WHERE MCUUID=?");
+            ps = connection.prepareStatement("SELECT `VERIFYCHECK` from playerdata WHERE MCUUID=?");
             ps.setString(1, ( uuid.toString() ));
             ResultSet result = ps.executeQuery();
             while (result.next()) {
@@ -112,6 +128,8 @@ public class Sqlgetter {
             ps.close();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            closeconnection(connection, ps);
         }
         return effect;
     }
@@ -119,23 +137,29 @@ public class Sqlgetter {
     public String selectverifydiscoruser(UUID uuid) {
         String dcname = "";
         try {
+            connection = DcVerify.MYSQL.getHikari().getConnection();
 
-            PreparedStatement ps = plugin.MYSQL.getHikari().getConnection().prepareStatement("SELECT `DCNAME` from playerdata WHERE MCUUID=?");
+            ps = connection.prepareStatement("SELECT `DCNAME` from playerdata WHERE MCUUID=?");
             ps.setString(1, ( uuid.toString() ));
             ResultSet result = ps.executeQuery();
             while (result.next()) {
                 dcname = result.getString("DCNAME");
+
             }
             ps.close();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            closeconnection(connection, ps);
         }
         return dcname;
     }
 
     public void removeverify(UUID uuid) {
         try {
-            PreparedStatement ps = plugin.MYSQL.getHikari().getConnection().prepareStatement("UPDATE playerdata SET DCNAME=?,VERIFYCHECK=?, DCID=? WHERE MCUUID=?");
+            connection = DcVerify.MYSQL.getHikari().getConnection();
+
+            ps = connection.prepareStatement("UPDATE playerdata SET DCNAME=?,VERIFYCHECK=?, DCID=? WHERE MCUUID=?");
             ps.setString(1, null);
             ps.setBoolean(2, false);
             ps.setString(3, null);
@@ -144,18 +168,41 @@ public class Sqlgetter {
             ps.close();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            closeconnection(connection, ps);
         }
     }
 
     public void accepterify(UUID uuid) {
         try {
-            PreparedStatement ps = plugin.MYSQL.getHikari().getConnection().prepareStatement("UPDATE playerdata SET VERIFYCHECK=? WHERE MCUUID=?");
+            connection = DcVerify.MYSQL.getHikari().getConnection();
+
+            ps = connection.prepareStatement("UPDATE playerdata SET VERIFYCHECK=? WHERE MCUUID=?");
             ps.setBoolean(1, true);
             ps.setString(2, uuid.toString());
             ps.executeUpdate();
             ps.close();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            closeconnection(connection, ps);
+        }
+    }
+
+    public void closeconnection(Connection connection, PreparedStatement ps) {
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        if (ps != null) {
+            try {
+                ps.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

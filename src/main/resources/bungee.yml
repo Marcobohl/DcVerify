@@ -2,5 +2,5 @@ name: DCVerify
 version: '${project.version}'
 main: net.celestiacraft.dcverify.DcVerify
 description: DCVerify System von Celestiacraft.net
-authors: Marcobohl
+author: Marcobohl
 website: Celestiacraft.net

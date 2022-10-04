@@ -4,6 +4,7 @@ import net.celestiacraft.dcverify.DcVerify;
 import net.celestiacraft.dcverify.mysql.Sqlgetter;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
+import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
@@ -40,6 +41,17 @@ public class Verify extends Command implements TabExecutor {
 
     public String verifydcnameemessage(String message, String placeholderreplace) {
         message = plugin.config.getString(message).replaceAll("%verifydcname%", placeholderreplace);
+        if (plugin.config.getBoolean("verify_prefix_use")) {
+            message = ChatColor.translateAlternateColorCodes('&', plugin.config.getString("verify_prefix") + " " + message);
+        } else {
+            message = ChatColor.translateAlternateColorCodes('&', message);
+        }
+        return message;
+
+    }
+
+    public String verifydeletmessage(String message, String placeholderreplace) {
+        message = plugin.config.getString(message).replaceAll("%verifyplayer%", placeholderreplace);
         if (plugin.config.getBoolean("verify_prefix_use")) {
             message = ChatColor.translateAlternateColorCodes('&', plugin.config.getString("verify_prefix") + " " + message);
         } else {
@@ -140,9 +152,8 @@ public class Verify extends Command implements TabExecutor {
                 }
             } else if (args[0].equalsIgnoreCase("reload")) {
                 if (sender.hasPermission("dcverify.admin.reload")) {
-                    Boolean ruckgabe = plugin.reload();
 
-                    if (ruckgabe) {
+                    if (plugin.reload()) {
                         sender.sendMessage(new TextComponent(message("verify_reload")));
                     } else {
                         sender.sendMessage(new TextComponent(message("verify_reload_error")));
@@ -153,6 +164,20 @@ public class Verify extends Command implements TabExecutor {
             } else {
                 sender.sendMessage(new TextComponent(message("verify_help")));
             }
+        } else if (args.length == 2) {
+
+            if (args[1].equalsIgnoreCase("delete")) {
+                if (sender.hasPermission("dcverify.admin.delete")) {
+
+
+                } else {
+                    sender.sendMessage(new TextComponent(message("verify_nopermissions")));
+                }
+
+            } else {
+                sender.sendMessage(new TextComponent(message("verify_help")));
+            }
+
         } else {
             sender.sendMessage(new TextComponent(message("verify_help")));
         }

@@ -11,6 +11,7 @@ verify_prefix: "[DCVerify]"
 # Mesage Placeholder
 # %verifycode% - Gibt deine 6 Stelligen Verify Code aus.
 # %verifydcname% - gibt den Verknüpften Account aus.
+# %verifyplayer% - gibt den Username aus.
 
 # message
 verify_nopermissions: "System fehler Bitte gebe /help ein um alle commands zu sehen."
@@ -27,6 +28,8 @@ verify_accept_successful: "&7Deine Verknüpfung mit:&a %Verifydcname% &7wurde hi
 verify_help: "&7Bitte gebe &a/Verify &7<§acheck&7/&adelete&7/§aaccept&7> ein."
 verify_reload: "&7Reload für DCVerify wurde &aerfolgreich&7 ausgeführt."
 verify_reload_error: "&7Reload für DCVerify konnte &cnicht&7 ausgeführt werden."
+verify_admin_offline: "&7Der angegeben Spieler ist nicht Online."
+verify_admin_delete: "&7Die Verknüpfung von %verifyplayer% wurde gelöscht."
 
 
 
